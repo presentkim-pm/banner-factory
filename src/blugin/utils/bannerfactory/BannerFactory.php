@@ -113,9 +113,9 @@ class BannerFactory{
             [, $pattern, $colorLevel] = $matches;
             $patterns[] = sprintf("{Pattern:%s,Color:%s}", $pattern, $colors[(int) $colorLevel] ?? $colors[self::LEVEL_PRIMARY]);
         }
-        $banner = new Banner($colors[self::LEVEL_BASE]);
-        $banner->setNamedTag(JsonNbtParser::parseJson(sprintf("{Patterns:[%s]}", implode(",", $patterns))));
-        return self::$cache[$hash] = $banner;
+        self::$cache[$hash] = new Banner($colors[self::LEVEL_BASE]);
+        self::$cache[$hash]->setNamedTag(JsonNbtParser::parseJson(sprintf("{Patterns:[%s]}", implode(",", $patterns))));
+        return clone self::$cache[$hash];
     }
 
     /** @param string[] $patternData */
