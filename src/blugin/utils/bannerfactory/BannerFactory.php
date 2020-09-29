@@ -25,9 +25,7 @@ declare(strict_types=1);
 
 namespace blugin\utils\bannerfactory;
 
-use pocketmine\item\Item;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
+use pocketmine\item\Banner;
 use pocketmine\nbt\JsonNbtParser;
 
 class BannerFactory{
@@ -84,18 +82,18 @@ class BannerFactory{
     /** @var string[][] pattern name => pattern data */
     protected static $patterns = null;
 
-    /** @var Item[] hash => cached item */
+    /** @var Banner[] hash => cached banner item */
     protected static $cache = [];
 
     /**
      * @param string $patternName
      * @param int[]  $colors color level => color number
      *
-     * @return Item
+     * @return Banner
      *
      * @throws \Exception
      */
-    public static function make(string $patternName, array $colors) : Item{
+    public static function make(string $patternName, array $colors) : Banner{
         self::registerDefaults();
 
         if(!isset($colors[self::LEVEL_BASE]) || !isset($colors[self::LEVEL_PRIMARY]))
@@ -115,9 +113,9 @@ class BannerFactory{
             [, $pattern, $colorLevel] = $matches;
             $patterns[] = sprintf("{Pattern:%s,Color:%s}", $pattern, $colors[(int) $colorLevel] ?? $colors[self::LEVEL_PRIMARY]);
         }
-        $item = ItemFactory::get(ItemIds::BANNER, $colors[self::LEVEL_BASE]);
-        $item->setNamedTag(JsonNbtParser::parseJson(sprintf("{Patterns:[%s]}", implode(",", $patterns))));
-        return self::$cache[$hash] = $item;
+        $banner = new Banner($colors[self::LEVEL_BASE]);
+        $banner->setNamedTag(JsonNbtParser::parseJson(sprintf("{Patterns:[%s]}", implode(",", $patterns))));
+        return self::$cache[$hash] = $banner;
     }
 
     /** @param string[] $patternData */
