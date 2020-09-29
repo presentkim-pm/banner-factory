@@ -121,6 +121,15 @@ class BannerFactory{
     /** @param string[] $patternData */
     public static function registerPattern(string $patternName, array $patternData) : void{
         self::registerDefaults();
+
+        //Remove caches when overwrite pattern
+        if(isset(self::$patterns[$patternName])){
+            foreach(array_keys(self::$cache) as $hash){
+                if(strpos($hash, "$patternName:") === 0){
+                    unset(self::$cache[$hash]);
+                }
+            }
+        }
         self::$patterns[$patternName] = $patternData;
     }
 
