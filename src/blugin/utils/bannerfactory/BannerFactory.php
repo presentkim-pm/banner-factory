@@ -65,6 +65,8 @@ class BannerFactory{
 
     public const PATTERN_ARROW_L = "arrow_left";
     public const PATTERN_ARROW_R = "array_right";
+    public const PATTERN_ARROW_U = "array_up";
+    public const PATTERN_ARROW_D = "array_down";
 
     public const PATTERN_MAP_NUM = [
         self::PATTERN_NUM_0,
@@ -157,7 +159,10 @@ class BannerFactory{
             self::PATTERN_NUM_9 => ["ls1", "hhb0", "ms1", "ts1", "rs1", "bo0"],
 
             self::PATTERN_ARROW_R => ["cr1", "ms1", "cbo0", "vhr0", "mc1"],
-            self::PATTERN_ARROW_L => ["cr1", "ms1", "cbo0", "vh0", "mc1"]
+            self::PATTERN_ARROW_L => ["cr1", "ms1", "cbo0", "vh0", "mc1"],
+
+            self::PATTERN_ARROW_U => ["ts1", "cs1", "cbo0"],
+            self::PATTERN_ARROW_D => ["bs1", "cs1", "cbo0"]
         ];
     }
 }
