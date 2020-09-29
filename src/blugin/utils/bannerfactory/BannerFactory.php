@@ -52,6 +52,8 @@ class BannerFactory{
     public const COLOR_ORANGE = 14;
     public const COLOR_WHITE = 15;
 
+    public const PATTERN_EMPTY = "empty";
+
     public const PATTERN_NUM_0 = "num0";
     public const PATTERN_NUM_1 = "num1";
     public const PATTERN_NUM_2 = "num2";
@@ -135,6 +137,7 @@ class BannerFactory{
             return;
 
         self::$patterns = [
+            self::PATTERN_EMPTY => [],
             self::PATTERN_NUM_0 => ["ls1", "rs1", "ts1", "bs1", "bo0"],
             self::PATTERN_NUM_1 => ["cs1", "tl1", "cbo0", "bs1", "bo0"],
             self::PATTERN_NUM_2 => ["ts1", "mr0", "bs1", "dls1", "bo0"],
