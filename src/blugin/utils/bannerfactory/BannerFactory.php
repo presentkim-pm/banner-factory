@@ -52,6 +52,30 @@ class BannerFactory{
     public const COLOR_ORANGE = 14;
     public const COLOR_WHITE = 15;
 
+    public const PATTERN_NUM_0 = "num0";
+    public const PATTERN_NUM_1 = "num1";
+    public const PATTERN_NUM_2 = "num2";
+    public const PATTERN_NUM_3 = "num3";
+    public const PATTERN_NUM_4 = "num4";
+    public const PATTERN_NUM_5 = "num5";
+    public const PATTERN_NUM_6 = "num6";
+    public const PATTERN_NUM_7 = "num7";
+    public const PATTERN_NUM_8 = "num8";
+    public const PATTERN_NUM_9 = "num9";
+
+    public const PATTERN_MAP_NUM = [
+        self::PATTERN_NUM_0,
+        self::PATTERN_NUM_1,
+        self::PATTERN_NUM_2,
+        self::PATTERN_NUM_3,
+        self::PATTERN_NUM_4,
+        self::PATTERN_NUM_5,
+        self::PATTERN_NUM_6,
+        self::PATTERN_NUM_7,
+        self::PATTERN_NUM_8,
+        self::PATTERN_NUM_9
+    ];
+
     /** @var string[][] pattern name => pattern data */
     protected static $patterns = null;
 
@@ -108,6 +132,16 @@ class BannerFactory{
             return;
 
         self::$patterns = [
+            self::PATTERN_NUM_0 => ["ls1", "rs1", "ts1", "bs1", "bo0"],
+            self::PATTERN_NUM_1 => ["cs1", "tl1", "cbo0", "bs1", "bo0"],
+            self::PATTERN_NUM_2 => ["ts1", "mr0", "bs1", "dls1", "bo0"],
+            self::PATTERN_NUM_3 => ["bs1", "ms1", "ts1", "cbo0", "rs1", "bo0"],
+            self::PATTERN_NUM_4 => ["ls1", "hhb1", "bs0", "rs1", "bo0"],
+            self::PATTERN_NUM_5 => ["bs1", "mr0", "ts1", "drs1", "bo0"],
+            self::PATTERN_NUM_6 => ["bs1", "rs1", "hh0", "ms1", "ls1", "bo0"],
+            self::PATTERN_NUM_7 => ["dls1", "ts1", "bo0"],
+            self::PATTERN_NUM_8 => ["ts1", "ls1", "ms1", "bs1", "rs1", "bo0"],
+            self::PATTERN_NUM_9 => ["ls1", "hhb0", "ms1", "ts1", "rs1", "bo0"]
         ];
     }
 }
