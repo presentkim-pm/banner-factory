@@ -64,9 +64,9 @@ class BannerFactory{
     public const PATTERN_NUM_9 = "num9";
 
     public const PATTERN_ARROW_L = "arrow_left";
-    public const PATTERN_ARROW_R = "array_right";
-    public const PATTERN_ARROW_U = "array_up";
-    public const PATTERN_ARROW_D = "array_down";
+    public const PATTERN_ARROW_R = "arrow_right";
+    public const PATTERN_ARROW_U = "arrow_up";
+    public const PATTERN_ARROW_D = "arrow_down";
 
     public const PATTERN_MAP_NUM = [
         self::PATTERN_NUM_0,
