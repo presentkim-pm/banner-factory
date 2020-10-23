@@ -1,5 +1,5 @@
 ---
-name: BannerFactory
+name: banner-factory
 antigen: blugin\utils\bannerfactory
 version: 2.0.0
 api: 3.0.0
