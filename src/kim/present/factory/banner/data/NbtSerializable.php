@@ -22,7 +22,7 @@
 
 declare(strict_types=1);
 
-namespace blugin\utils\bannerfactory\data;
+namespace kim\present\factory\banner\data;
 
 use pocketmine\nbt\tag\CompoundTag;
 

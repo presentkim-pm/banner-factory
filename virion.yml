@@ -1,6 +1,6 @@
 ---
 name: banner-factory
-antigen: blugin\utils\bannerfactory
+antigen: kim\present\factory\banner
 version: 2.0.0
 api: 3.0.0
 authors: [PresentKim, Blugin-team]

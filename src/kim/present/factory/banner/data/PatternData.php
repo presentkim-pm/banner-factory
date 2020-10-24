@@ -22,9 +22,9 @@
 
 declare(strict_types=1);
 
-namespace blugin\utils\bannerfactory\data;
+namespace kim\present\factory\banner\data;
 
-use blugin\utils\bannerfactory\BannerConsts;
+use kim\present\factory\banner\BannerConsts;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\IntTag;
 use pocketmine\nbt\tag\StringTag;
