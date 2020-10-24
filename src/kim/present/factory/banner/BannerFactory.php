@@ -22,10 +22,10 @@
 
 declare(strict_types=1);
 
-namespace blugin\utils\bannerfactory;
+namespace kim\present\factory\banner;
 
-use blugin\utils\bannerfactory\data\BannerData;
-use blugin\utils\bannerfactory\data\PatternData;
+use kim\present\factory\banner\data\BannerData;
+use kim\present\factory\banner\data\PatternData;
 use pocketmine\item\Banner;
 
 class BannerFactory implements BannerConsts, DefaultPatternIds{

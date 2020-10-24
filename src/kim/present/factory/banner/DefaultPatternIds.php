@@ -22,7 +22,7 @@
 
 declare(strict_types=1);
 
-namespace blugin\utils\bannerfactory;
+namespace kim\present\factory\banner;
 
 interface DefaultPatternIds{
     /** empty banner pattern */
