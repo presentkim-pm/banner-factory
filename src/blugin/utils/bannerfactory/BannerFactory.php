@@ -27,11 +27,17 @@ namespace blugin\utils\bannerfactory;
 
 use blugin\utils\bannerfactory\data\BannerData;
 use blugin\utils\bannerfactory\data\PatternData;
+use Exception;
+use InvalidArgumentException;
 use pocketmine\item\Banner;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 
-class BannerFactory implements BannerConsts, DefaultPatternIds{
+use function array_keys;
+use function implode;
+use function strpos;
+
+class BannerFactory implements BannerConstants, DefaultPatternIds{
     /** @var PatternData[] banner name => banner data */
     protected static ?array $bannerDataMap = null;
 
@@ -44,11 +50,11 @@ class BannerFactory implements BannerConsts, DefaultPatternIds{
      *
      * @return Banner
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public static function make(string $bannerName, array $colors) : Banner{
         if(!isset($colors[self::LEVEL_BASE]))
-            throw new \InvalidArgumentException("colors paramter must includes COLOR_BASE");
+            throw new InvalidArgumentException("colors parameter must includes COLOR_BASE");
 
         $hash = $bannerName . ":" . implode(":", $colors);
         if(isset(self::$cache[$hash]))
@@ -56,7 +62,7 @@ class BannerFactory implements BannerConsts, DefaultPatternIds{
 
         $bannerData = self::getBannerData($bannerName);
         if($bannerData === null)
-            throw new \InvalidArgumentException("$bannerName is invalid banner name");
+            throw new InvalidArgumentException("$bannerName is invalid banner name");
 
         /** @var Banner $banner */
         $banner = ItemFactory::getInstance()->get(ItemIds::BANNER, $colors[self::LEVEL_BASE]);

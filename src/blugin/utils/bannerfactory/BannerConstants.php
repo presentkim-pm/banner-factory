@@ -25,7 +25,7 @@ declare(strict_types=1);
 
 namespace blugin\utils\bannerfactory;
 
-interface BannerConsts{
+interface BannerConstants{
     /** banner patterns */
     public const PATTERN_BRICKS = "bri";
     public const PATTERN_BORDER = "bo";

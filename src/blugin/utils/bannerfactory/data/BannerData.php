@@ -25,11 +25,13 @@ declare(strict_types=1);
 
 namespace blugin\utils\bannerfactory\data;
 
-use blugin\utils\bannerfactory\BannerConsts;
+use blugin\utils\bannerfactory\BannerConstants;
+use JsonSerializable;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\ListTag;
+use RuntimeException;
 
-class BannerData implements \JsonSerializable, NbtSerializable, BannerConsts{
+class BannerData implements JsonSerializable, NbtSerializable, BannerConstants{
     /** @var PatternData[] */
     protected array $patterns = [];
 
@@ -66,7 +68,7 @@ class BannerData implements \JsonSerializable, NbtSerializable, BannerConsts{
 
     public static function jsonDeserialize($json) : self{
         if(!is_array($json))
-            throw new \RuntimeException("Invalid banner patterns data : $json");
+            throw new RuntimeException("Invalid banner patterns data : $json");
 
         $patterns = [];
         foreach($json as $patternJson){
