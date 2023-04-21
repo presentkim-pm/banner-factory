@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  *
  *  ____                           _   _  ___
  * |  _ \ _ __ ___  ___  ___ _ __ | |_| |/ (_)_ __ ___
@@ -52,7 +52,7 @@ class BannerFactory implements BannerConsts, DefaultPatternIds{
             return clone self::$cache[$hash];
 
         $bannerData = self::getBannerData($bannerName);
-        if($bannerData  === null)
+        if($bannerData === null)
             throw new \InvalidArgumentException("$bannerName is invalid banner name");
 
         self::$cache[$hash] = new Banner($colors[self::LEVEL_BASE]);
