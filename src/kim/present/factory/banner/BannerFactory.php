@@ -24,68 +24,72 @@ declare(strict_types=1);
 
 namespace kim\present\factory\banner;
 
-use kim\present\factory\banner\data\BannerData;
-use kim\present\factory\banner\data\PatternData;
+use kim\present\factory\banner\data\BannerColorSet;
+use kim\present\factory\banner\data\BannerPattern;
+use pocketmine\data\bedrock\DyeColorIdMap;
 use pocketmine\item\Banner;
+use pocketmine\item\ItemFactory;
+use pocketmine\item\ItemIds;
+use pocketmine\utils\SingletonTrait;
 
-class BannerFactory implements BannerConsts, DefaultPatternIds{
-    /** @var PatternData banner name => banner data */
-    protected static $bannerDataMap = null;
+final class BannerFactory{
+    use SingletonTrait;
+
+    /** @var BannerPattern[][] banner name => banner patterns */
+    private array $bannerPatterns = [];
 
     /** @var Banner[] hash => cached banner item */
-    protected static $cache = [];
+    private array $cache = [];
 
-    /**
-     * @param string $bannerName
-     * @param int[]  $colors color level => color number
-     *
-     * @return Banner
-     *
-     * @throws \Exception
-     */
-    public static function make(string $bannerName, array $colors) : Banner{
-        if(!isset($colors[self::LEVEL_BASE]))
-            throw new \InvalidArgumentException("colors paramter must includes COLOR_BASE");
-
-        $hash = $bannerName . ":" . implode(":", $colors);
-        if(isset(self::$cache[$hash]))
-            return clone self::$cache[$hash];
-
-        $bannerData = self::getBannerData($bannerName);
-        if($bannerData === null)
-            throw new \InvalidArgumentException("$bannerName is invalid banner name");
-
-        self::$cache[$hash] = new Banner($colors[self::LEVEL_BASE]);
-        self::$cache[$hash]->setNamedTag($bannerData->nbtSerialize($colors));
-        return clone self::$cache[$hash];
+    private function __construct(){
+        foreach(DefaultPatternIds::DEFAULTS_DATA_MAP as $name => $patterns){
+            $this->registerBanner($name, array_map(BannerPattern::fromHash(...), $patterns));
+        }
     }
 
-    public static function registerBannerData(string $patternName, BannerData $bannerData) : void{
-        self::registerDefaults();
+    /**
+     * Make banner item with banner name and banner color set
+     *   if the banner name is already registered in the banner factory.
+     *   Otherwise, returns null.
+     */
+    public function getBannerItem(string $bannerName, BannerColorSet $colorSet) : ?Banner{
+        $hash = $bannerName . ":" . $colorSet->hash();
 
-        //Remove caches when overwrite pattern
-        if(isset(self::$bannerDataMap[$patternName])){
-            foreach(array_keys(self::$cache) as $hash){
-                if(strpos($hash, "$patternName:") === 0){
-                    unset(self::$cache[$hash]);
+        $bannerData = self::getBanner($bannerName);
+        if($bannerData === null){
+            return null;
+        }
+
+        $dyeIdMap = DyeColorIdMap::getInstance();
+        /** @var Banner $bannerItem */
+        $bannerItem = ItemFactory::getInstance()->get(ItemIds::BANNER, $dyeIdMap->toInvertedId($colorSet->colors[0]));
+        $bannerItem->setPatterns(array_map(fn(BannerPattern $pattern) => $pattern->toBannerPatternLayer($colorSet), $bannerData));
+
+        $this->cache[$hash] = $bannerItem;
+        return clone $this->cache[$hash];
+    }
+
+    /**
+     * @param string          $bannerName
+     * @param BannerPattern[] $patterns
+     */
+    public function registerBanner(string $bannerName, array $patterns) : void{
+        if(isset($this->bannerPatterns[$bannerName])){
+            foreach(array_keys($this->cache) as $hash){
+                if(str_starts_with($hash, "$bannerName:")){
+                    unset($this->cache[$hash]);
                 }
             }
         }
-        self::$bannerDataMap[$patternName] = $bannerData;
+        $this->bannerPatterns[$bannerName] = $patterns;
     }
 
-    /** @return BannerData|null */
-    public static function getBannerData(string $patternName) : ?BannerData{
-        self::registerDefaults();
-        return self::$bannerDataMap[$patternName] ?? null;
-    }
-
-    public static function registerDefaults() : void{
-        if(self::$bannerDataMap === null){
-            self::$bannerDataMap = [];
-            foreach(self::DEFAULTS_DATA_MAP as $name => $json){
-                self::$bannerDataMap[$name] = BannerData::jsonDeserialize($json);
-            }
-        }
+    /**
+     * @param string $bannerName
+     *
+     * @return BannerPattern[]|null
+     */
+    public function getBanner(string $bannerName) : ?array{
+        return $this->bannerPatterns[$bannerName] ?? null;
     }
 }
