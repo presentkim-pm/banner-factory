@@ -43,7 +43,7 @@ final class BannerFactory{
 
     private function __construct(){
         foreach(DefaultPatternIds::DEFAULTS_DATA_MAP as $name => $patterns){
-            $this->registerBanner($name, array_map(BannerPattern::fromHash(...), $patterns));
+            $this->registerBanner($name, array_map(fn(string $hash) => BannerPattern::fromHash($hash), $patterns));
         }
     }
 

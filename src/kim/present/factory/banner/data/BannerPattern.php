@@ -40,8 +40,8 @@ class BannerPattern{
         return BannerPatternTypeIdMap::getInstance()->toId($this->type) . $this->layer;
     }
 
-    public static function fromHash($json) : self{
-        if(!is_string($json) || !preg_match("/([a-z]*)([0-9]*)/", $json, $matches))
+    public static function fromHash(string $json) : self{
+        if(!preg_match("/([a-z]*)([0-9]*)/", $json, $matches))
             throw new RuntimeException("Invalid banner pattern data : $json");
 
         [, $patternId, $colorLayer] = $matches;

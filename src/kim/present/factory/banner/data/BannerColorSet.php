@@ -38,7 +38,7 @@ class BannerColorSet{
     /** @internal Banner color set hash for caching banners */
     public function hash() : string{
         $dyeIdMap = DyeColorIdMap::getInstance();
-        return implode("", array_map($dyeIdMap->toId(...), $this->colors));
+        return implode("", array_map(fn(DyeColor $color) => $dyeIdMap->toId($color), $this->colors));
     }
 
     public static function fromHash(string $hash) : self{
