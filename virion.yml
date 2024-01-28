@@ -1,7 +1,7 @@
 ---
 name: banner-factory
 antigen: kim\present\factory\banner
-version: 3.1.0
+version: 3.2.0
 api: 5.0.0
 authors: PresentKim
 description: Factory to quickly create special shaped banner items
