@@ -64,6 +64,14 @@ interface DefaultPatternIds{
         self::PATTERN_ARROW_D
     ];
 
+    /** gradation patterns */
+    public const PATTERN_GRADATION_BRICKS = "gra_bricks";
+    public const PATTERN_GRADATION_PVP = "gra_pvp";
+
+    /** animal patterns */
+    public const PATTERN_FOX = "fox";
+    public const PATTERN_DUCK = "duck";
+
     /**
      * @internal
      *
@@ -87,6 +95,12 @@ interface DefaultPatternIds{
         self::PATTERN_ARROW_L => ["cr1", "ms1", "cbo0", "vh0", "mc1"],
 
         self::PATTERN_ARROW_U => ["ts1", "cs1", "cbo0"],
-        self::PATTERN_ARROW_D => ["bs1", "cs1", "cbo0"]
+        self::PATTERN_ARROW_D => ["bs1", "cs1", "cbo0"],
+
+        self::PATTERN_GRADATION_BRICKS => ["gra1", "gru2", "bri0"],
+        self::PATTERN_GRADATION_PVP => ["gra1", "gru2", "ss0", "cbo0"],
+
+        self::PATTERN_FOX => ["mr0", "cbo1", "mc1", "cre1", "tt1"],
+        self::PATTERN_DUCK => ["cs0", "hhb1", "bs0", "bo0", "ms1", "ts0"]
     ];
 }

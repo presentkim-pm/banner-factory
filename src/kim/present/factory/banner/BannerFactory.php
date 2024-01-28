@@ -26,10 +26,8 @@ namespace kim\present\factory\banner;
 
 use kim\present\factory\banner\data\BannerColorSet;
 use kim\present\factory\banner\data\BannerPattern;
-use pocketmine\data\bedrock\DyeColorIdMap;
 use pocketmine\item\Banner;
-use pocketmine\item\ItemFactory;
-use pocketmine\item\ItemIds;
+use pocketmine\item\VanillaItems;
 use pocketmine\utils\SingletonTrait;
 
 final class BannerFactory{
@@ -60,9 +58,7 @@ final class BannerFactory{
             return null;
         }
 
-        $dyeIdMap = DyeColorIdMap::getInstance();
-        /** @var Banner $bannerItem */
-        $bannerItem = ItemFactory::getInstance()->get(ItemIds::BANNER, $dyeIdMap->toInvertedId($colorSet->colors[0]));
+        $bannerItem = VanillaItems::BANNER()->setColor($colorSet->colors[0]);
         $bannerItem->setPatterns(array_map(fn(BannerPattern $pattern) => $pattern->toBannerPatternLayer($colorSet), $bannerData));
 
         $this->cache[$hash] = $bannerItem;
