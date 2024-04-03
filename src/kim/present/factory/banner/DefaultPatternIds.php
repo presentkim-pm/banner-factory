@@ -11,13 +11,15 @@
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the MIT License. see <https://opensource.org/licenses/MIT>.
  *
- * @author  PresentKim (debe3721@gmail.com)
- * @link    https://github.com/PresentKim
- * @license https://opensource.org/licenses/MIT MIT License
+ * @author       PresentKim (debe3721@gmail.com)
+ * @link         https://github.com/PresentKim
+ * @license      https://opensource.org/licenses/MIT MIT License
  *
  *   (\ /)
  *  ( . .) ♥
  *  c(")(")
+ *
+ * @noinspection PhpUnused
  */
 
 declare(strict_types=1);
@@ -25,6 +27,7 @@ declare(strict_types=1);
 namespace kim\present\factory\banner;
 
 interface DefaultPatternIds{
+
     /** empty banner pattern */
     public const PATTERN_EMPTY = "empty";
 

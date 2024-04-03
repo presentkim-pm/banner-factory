@@ -11,13 +11,15 @@
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the MIT License. see <https://opensource.org/licenses/MIT>.
  *
- * @author  PresentKim (debe3721@gmail.com)
- * @link    https://github.com/PresentKim
- * @license https://opensource.org/licenses/MIT MIT License
+ * @author       PresentKim (debe3721@gmail.com)
+ * @link         https://github.com/PresentKim
+ * @license      https://opensource.org/licenses/MIT MIT License
  *
  *   (\ /)
  *  ( . .) ♥
  *  c(")(")
+ *
+ * @noinspection PhpUnused
  */
 
 declare(strict_types=1);
@@ -30,7 +32,8 @@ use pocketmine\data\bedrock\BannerPatternTypeIdMap;
 use RuntimeException;
 
 class BannerPattern{
-    public function __construct(public BannerPatternType $type, public int $layer){ }
+
+    public function __construct(public BannerPatternType $type, public int $layer){}
 
     public function toBannerPatternLayer(BannerColorSet $colorSet) : BannerPatternLayer{
         return new BannerPatternLayer($this->type, $colorSet->colors[$this->layer] ?? $colorSet->colors[0]);
@@ -41,8 +44,9 @@ class BannerPattern{
     }
 
     public static function fromHash(string $json) : self{
-        if(!preg_match("/([a-z]*)([0-9]*)/", $json, $matches))
+        if(!preg_match("/([a-z]*)([0-9]*)/", $json, $matches)){
             throw new RuntimeException("Invalid banner pattern data : $json");
+        }
 
         [, $patternId, $colorLayer] = $matches;
         return new self(BannerPatternTypeIdMap::getInstance()->fromId($patternId), (int) $colorLayer);

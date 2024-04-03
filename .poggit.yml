@@ -1,12 +1,12 @@
 --- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/presentkim-pm/banner-factory
 build-by-default: true
 branches:
-    - main
+  - main
 projects:
-    banner-factory:
-        model: virion
-        type: library
-        icon: assets/icon.png
-        lint:
-            phpstan: false
+  banner-factory:
+    model: virion
+    type: library
+    icon: assets/icon.png
+    lint:
+      phpstan: false
 ...

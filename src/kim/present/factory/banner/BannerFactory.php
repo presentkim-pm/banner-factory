@@ -11,13 +11,15 @@
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the MIT License. see <https://opensource.org/licenses/MIT>.
  *
- * @author  PresentKim (debe3721@gmail.com)
- * @link    https://github.com/PresentKim
- * @license https://opensource.org/licenses/MIT MIT License
+ * @author       PresentKim (debe3721@gmail.com)
+ * @link         https://github.com/PresentKim
+ * @license      https://opensource.org/licenses/MIT MIT License
  *
  *   (\ /)
  *  ( . .) ♥
  *  c(")(")
+ *
+ * @noinspection PhpUnused
  */
 
 declare(strict_types=1);
@@ -53,13 +55,14 @@ final class BannerFactory{
     public function getBannerItem(string $bannerName, BannerColorSet $colorSet) : ?Banner{
         $hash = $bannerName . ":" . $colorSet->hash();
 
-        $bannerData = self::getBanner($bannerName);
+        $bannerData = $this->getBanner($bannerName);
         if($bannerData === null){
             return null;
         }
 
         $bannerItem = VanillaItems::BANNER()->setColor($colorSet->colors[0]);
-        $bannerItem->setPatterns(array_map(fn(BannerPattern $pattern) => $pattern->toBannerPatternLayer($colorSet), $bannerData));
+        $bannerItem->setPatterns(array_map(fn(BannerPattern $pattern) => $pattern->toBannerPatternLayer($colorSet),
+            $bannerData));
 
         $this->cache[$hash] = $bannerItem;
         return clone $this->cache[$hash];

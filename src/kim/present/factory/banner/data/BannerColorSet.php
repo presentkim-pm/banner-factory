@@ -11,13 +11,15 @@
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the MIT License. see <https://opensource.org/licenses/MIT>.
  *
- * @author  PresentKim (debe3721@gmail.com)
- * @link    https://github.com/PresentKim
- * @license https://opensource.org/licenses/MIT MIT License
+ * @author       PresentKim (debe3721@gmail.com)
+ * @link         https://github.com/PresentKim
+ * @license      https://opensource.org/licenses/MIT MIT License
  *
  *   (\ /)
  *  ( . .) ♥
  *  c(")(")
+ *
+ * @noinspection PhpUnused
  */
 
 declare(strict_types=1);
@@ -28,6 +30,7 @@ use pocketmine\block\utils\DyeColor;
 use pocketmine\data\bedrock\DyeColorIdMap;
 
 class BannerColorSet{
+
     /** @param DyeColor[] $colors */
     public array $colors;
 
@@ -38,11 +41,17 @@ class BannerColorSet{
     /** @internal Banner color set hash for caching banners */
     public function hash() : string{
         $dyeIdMap = DyeColorIdMap::getInstance();
-        return implode("", array_map(fn(DyeColor $color) => $dyeIdMap->toId($color), $this->colors));
+        return implode("", array_map(
+                static fn(DyeColor $color) => $dyeIdMap->toId($color),
+                $this->colors)
+        );
     }
 
     public static function fromHash(string $hash) : self{
         $dyeIdMap = DyeColorIdMap::getInstance();
-        return new self(...array_map(fn(string $id) => $dyeIdMap->fromId((int) $id) ?? DyeColor::WHITE(), str_split($hash)));
+        return new self(...array_map(
+            static fn(string $id) => $dyeIdMap->fromId((int) $id) ?? DyeColor::WHITE(),
+            str_split($hash)
+        ));
     }
 }
